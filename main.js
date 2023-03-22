@@ -2,6 +2,9 @@
 // #ifndef VUE3
 import Vue from 'vue'
 import App from './App'
+import Request from './api/request.js'
+uni.$http = Request
+
 
 Vue.config.productionTip = false
 
