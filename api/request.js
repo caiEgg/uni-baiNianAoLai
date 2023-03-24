@@ -22,5 +22,12 @@ class Request extends Http{
 			method:'GET'
 		})
 	}
+	// 获取分类列表
+	static getCategories(){
+		return Http.request({
+			url:'/api/public/v1/categories',
+			method:'GET'
+		})
+	}
 }
 export default Request
