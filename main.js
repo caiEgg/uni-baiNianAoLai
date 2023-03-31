@@ -3,6 +3,11 @@
 import Vue from 'vue'
 import App from './App'
 import Request from './api/request.js'
+import mySearch from './components/my-search/my-search.vue'
+
+Vue.component('my-search',mySearch)
+
+
 uni.$http = Request
 
 

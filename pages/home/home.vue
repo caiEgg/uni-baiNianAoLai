@@ -1,5 +1,8 @@
 <template>
 	<view>
+		<view class="searchTop">
+			<my-search @goToSearch="goToSearch"></my-search>
+		</view>
 		<!-- 轮播图 -->
 		<swiper :indicator-dots="true" :autoplay="true" :interval="3000" :duration="1000" :circular="true">
 			<swiper-item v-for="swiper in swiperList" :key="swiper.goods_id">
@@ -38,29 +41,13 @@
 		data() {
 			return {
 				swiperList: [{
-					"image_src": "",
-					"open_type": "",
-					"goods_id": 0,
-					"navigator_url": ""
+					
 				}],
 				navList: [{
-					image_src: "",
-					name: "",
-					navigator_url: "",
-					open_type: ""
+					
 				}],
 				floorList: [{
-					floor_title: {
-						image_src: '',
-						name: ''
-					},
-					product_list: [{
-						image_src: '',
-						image_width: 0,
-						name: '',
-						navigator_url: '',
-						open_type: ''
-					}],
+					
 				}]
 			};
 		},
@@ -97,18 +84,27 @@
 							product.navigator_url = "/subPackage/goods_list/goods_list?" + product.navigator_url.split('?')[1]
 						})
 					})
-					console.log("现在的结果是",result)
+					
 					this.floorList = result
-					console.log(this.floorList,"这是我的")
+					
 				}
 			},
-			
+			goToSearch(){
+				uni.navigateTo({
+					url:'/subPackage/search/search'
+				})
+			}
 
 		}
 	}
 </script>
 
 <style lang="scss">
+	.searchTop{
+		position: sticky;
+		top: 0;
+		z-index: 999;
+	}
 	swiper {
 		height: 330rpx;
 

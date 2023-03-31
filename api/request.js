@@ -29,5 +29,20 @@ class Request extends Http{
 			method:'GET'
 		})
 	}
+	// 获取搜索列表数据
+	static getSearchList(data){
+		return Http.request({
+			url:'/api/public/v1/goods/search',
+			method:'GET',
+			data:data
+		})
+	}
+	//根据输入框关键字进行搜索
+	static getInputList(keyword){
+		return Http.request({
+			url:'/api/public/v1/goods/qsearch?query='+keyword,
+			method:'GET',
+		})
+	}
 }
 export default Request
