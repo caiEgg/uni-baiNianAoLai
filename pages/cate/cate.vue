@@ -85,7 +85,7 @@
 			},
 			goGoodsLisSubPackage(bottomItem) {
 				uni.navigateTo({
-					url: '/subPackage/goods_list/goods_list?catId=' + bottomItem.cat_id
+					url: '/subPackage/goods_list/goods_list?cid=' + bottomItem.cat_id
 
 				})
 			},

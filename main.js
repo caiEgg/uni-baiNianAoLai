@@ -4,9 +4,9 @@ import Vue from 'vue'
 import App from './App'
 import Request from './api/request.js'
 import mySearch from './components/my-search/my-search.vue'
-
+import myGood from './components/my-good/my-good.vue'
 Vue.component('my-search',mySearch)
-
+Vue.component('my-good',myGood)
 
 uni.$http = Request
 

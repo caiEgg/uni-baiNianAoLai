@@ -1,6 +1,6 @@
 <template>
 	<view>
-		商品详情页
+		这是详情
 	</view>
 </template>
 
@@ -11,9 +11,7 @@
 				
 			};
 		},
-		onLoad: function(option) {
-			console.log(option.good_id)
-		}
+		
 	}
 </script>
 

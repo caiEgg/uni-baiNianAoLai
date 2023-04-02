@@ -102,7 +102,7 @@
 			},
 			goGoodsDetail(goods_id) {
 				uni.navigateTo({
-					url: '/subPackage/goods_detail/goods_detail?goods_id=' + goods_id
+					url: '/subPackage/goods_list/goods_list?goods_id=' + goods_id
 				})
 			},
 				
@@ -114,7 +114,7 @@
 			},
 			goDetail(keywordItem){
 				uni.navigateTo({
-					url: '/subPackage/goods_detail/goods_detail?goods_name=' + keywordItem
+					url: '/subPackage/goods_list/goods_list?goods_name=' + keywordItem
 				})
 			}
 		},
