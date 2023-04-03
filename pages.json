@@ -88,8 +88,7 @@
                     "style" :                                                                                    
                 {
                     "navigationBarTitleText": "",
-                    "enablePullDownRefresh": true,
-					"backgroundColor": "FFFFFF"
+                    "enablePullDownRefresh": true
                 }
                 
                 }

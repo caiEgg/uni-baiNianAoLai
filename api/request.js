@@ -44,5 +44,13 @@ class Request extends Http{
 			method:'GET',
 		})
 	}
+	// 根据商品id获取商品详情信息
+	static getGoodsDetail(goods_id){
+		return Http.request({
+			url:'/api/public/v1/goods/detail',
+			method:'GET',
+			data:{goods_id:goods_id}
+		})
+	}
 }
 export default Request
