@@ -29,4 +29,30 @@
 		color: #333;
 		padding: 10px;
 	}
+	/* 复选框 */
+	/* 复选框-圆角 */
+	/* #ifndef APP-NVUE */
+	checkbox.checkbox-round .wx-checkbox-input,
+	checkbox.checkbox-round .uni-checkbox-input {
+	    border-radius: 100rpx;
+	}
+	// /* 复选框-背景颜色 */
+	checkbox.checkbox-background-red[checked] .wx-checkbox-input,
+	checkbox.checkbox-background-red.checked .uni-checkbox-input{
+	    background-color: #C00000 !important;
+	    border-color: #C00000 !important;
+	    color: #ffffff !important;
+	}
+	/* #endif */
+	uni-checkbox .uni-checkbox-wrapper .uni-checkbox-input{
+		background-color: #ffffff !important;
+		border-color: #efefef !important;
+	}
+	uni-checkbox .uni-checkbox-wrapper .uni-checkbox-input-checked {
+	  background-color: #C00000 !important;
+	  border-color: #C00000 !important;
+	  color: #ffffff !important;
+	}
+	
+	
 </style>

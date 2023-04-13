@@ -52,8 +52,10 @@
 			}
 		},
 		onReachBottom(){
-			console.log('1')
 			if(this.total/this.queryObj.pagesize <= this.queryObj.pagenum){
+				uni.showToast({
+					title:"数据加载完成啦"
+				})
 				return
 			}
 			if(this.isLoading ==true) return

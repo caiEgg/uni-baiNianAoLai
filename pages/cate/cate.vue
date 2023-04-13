@@ -41,7 +41,9 @@
 </template>
 
 <script>
+	import mixin from '../../utils/mixin.js'
 	export default {
+		mixins:[mixin],
 		data() {
 			return {
 				cateGoryList: [{}],

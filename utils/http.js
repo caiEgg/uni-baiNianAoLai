@@ -9,24 +9,23 @@ const exceptionMessage = {
 }
 class Http {
 	static async request(options) {
-		const config = await Http._beforeRequest(options)
-		config.url = configObj.baseUrl + options.url
-		console.log("请求参数是",config)
-		const response = await uni.request(config)
+		Http._beforeRequest()
+		options.url = configObj.baseUrl + options.url
+		console.log("请求参数是",options)
+		const response = await uni.request(options)
 		console.log("请求结果是",response)
 		// 对响应信息做处理
-		return await Http._afterResponse(response)
+		return Http._afterResponse(response)
 	}
 	// 请求拦截器
-	static async _beforeRequest(config) {
+	static _beforeRequest() {
 		uni.showLoading({
 			title:'数据加载中……'
-		})
-		return config
+		})	
 	}
 	
 	// 响应拦截器
-	static async _afterResponse(response){
+	static  _afterResponse(response){
 		uni.hideLoading()
 		// 这个要看接口数据是什么结构
 		const {message,meta}= response[1].data

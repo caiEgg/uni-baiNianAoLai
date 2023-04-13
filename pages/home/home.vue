@@ -1,43 +1,50 @@
 <template>
-	<view>
+	<view class="">
 		<view class="searchTop">
-			<my-search @goToSearch="goToSearch"></my-search>
+			<mySearch :bgColor="'#C00000'" :radius="30" @goToSearch="goToSearch"></mySearch>
 		</view>
-		<!-- 轮播图 -->
-		<swiper :indicator-dots="true" :autoplay="true" :interval="3000" :duration="1000" :circular="true">
-			<swiper-item v-for="swiper in swiperList" :key="swiper.goods_id">
-				<navigator class="swiper-item" :url="'/subPackage/goods_detail/goods_detail?good_id='+ swiper.goods_id">
-					<image :src="swiper.image_src"></image>
-				</navigator>
-			</swiper-item>
-		</swiper>
-		<!-- 分类导航 -->
-		<view class="navContainer">
-			<view class="navItem" v-for="nav,navIndex in navList" :key=navIndex @click="goCatePage(nav)">
-				<image :src="nav.image_src"></image>
-			</view>
-		</view>
-		<!-- 楼层渲染 -->
-		<view class="floorList" v-for="floor,floorIndex in floorList" :key="floorIndex">
-			<image class="floorTitle" :src="floor.floor_title.image_src"></image>
-			<view class="productList">
-				<!-- 左边大图 -->
-					<navigator class="productItemLeft" :url="floor.product_list[0].navigator_url"> 
-						<image :src="floor.product_list[0].image_src" :style="{'width':floor.product_list[0].image_width + 'rpx'}" mode="widthFix" ></image>
+		
+		
+		<view v-if="swiperList[0].image_src">
+			<!-- 轮播图 -->
+			<swiper :indicator-dots="true" :autoplay="true" :interval="3000" :duration="1000" :circular="true">
+				<swiper-item v-for="swiper in swiperList" :key="swiper.goods_id">
+					<navigator class="swiper-item" :url="'/subPackage/goods_detail/goods_detail?good_id='+ swiper.goods_id">
+						<image :src="swiper.image_src"></image>
 					</navigator>
-					<!-- 右边小图 -->
-					<view class="productItemRight" >
-						<navigator class="productItemRightItem" v-for="product,index in floor.product_list" v-if="index!==0" :url="product.navigator_url">
-							<image :src="product.image_src" :style="{'width':product.image_width + 'rpx'}" mode="widthFix" ></image>
-						</navigator>						
-					</view>				
+				</swiper-item>
+			</swiper>
+			<!-- 分类导航 -->
+			<view class="navContainer">
+				<view class="navItem" v-for="nav,navIndex in navList" :key=navIndex @click="goCatePage(nav)">
+					<image :src="nav.image_src"></image>
+				</view>
+			</view>
+			<!-- 楼层渲染 -->
+			<view class="floorList" v-for="floor,floorIndex in floorList" :key="floorIndex">
+				<image class="floorTitle" :src="floor.floor_title.image_src"></image>
+				<view class="productList">
+					<!-- 左边大图 -->
+						<navigator class="productItemLeft" :url="floor.product_list[0].navigator_url"> 
+							<image :src="floor.product_list[0].image_src" :style="{'width':floor.product_list[0].image_width + 'rpx'}" mode="widthFix" ></image>
+						</navigator>
+						<!-- 右边小图 -->
+						<view class="productItemRight" >
+							<navigator class="productItemRightItem" v-for="product,index in floor.product_list" v-if="index!==0" :url="product.navigator_url">
+								<image :src="product.image_src" :style="{'width':product.image_width + 'rpx'}" mode="widthFix" ></image>
+							</navigator>						
+						</view>				
+				</view>
 			</view>
 		</view>
 	</view>
 </template>
 
 <script>
+	import mySearch from '../../components/my-search/my-search.vue'
+	import mixin from '../../utils/mixin.js'
 	export default {
+		mixins:[mixin],
 		data() {
 			return {
 				swiperList: [{
@@ -50,6 +57,9 @@
 					
 				}]
 			};
+		},
+		components:{
+			mySearch
 		},
 		onLoad() {
 			this.getSwiperList()
@@ -100,12 +110,16 @@
 </script>
 
 <style lang="scss">
+	page{
+		background-color: #ffffff;
+	}
 	.searchTop{
 		position: sticky;
-		top: 0;
-		z-index: 999;
+		top:0;
+		z-index:999;
 	}
 	swiper {
+		// margin-top: 93rpx;
 		height: 330rpx;
 
 		.swiper-item,

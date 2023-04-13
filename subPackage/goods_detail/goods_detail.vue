@@ -24,15 +24,15 @@
 				快递：免运费
 			</view>
 		</view>
-		
+
 		<view class="uni-common-mt" style="background:#FFF; padding:20rpx;">
 			<rich-text :nodes="strings"></rich-text>
 		</view>
 		<view class="navContainer">
-			<uni-goods-nav  :fill="true" :options="options" :buttonGroup="buttonGroup" @click="onClick"
+			<uni-goods-nav :fill="true" :options="options" :buttonGroup="buttonGroup" @click="onClick"
 				@buttonClick="buttonClick" />
 		</view>
-		
+
 		<!-- <view class="navContainer">
 			<view class="iconsContainer">
 				<view class="iconsItem">
@@ -58,6 +58,11 @@
 </template>
 
 <script>
+	import {
+		mapState,
+		mapMutations,
+		mapGetters
+	} from 'vuex'
 	export default {
 
 		data() {
@@ -74,7 +79,7 @@
 				}, {
 					icon: 'cart',
 					text: '购物车',
-					info: 2
+					info: 0
 				}],
 				buttonGroup: [{
 						text: '加入购物车',
@@ -92,18 +97,50 @@
 		onLoad(options) {
 			this.goods_id = options.goods_id
 			this.getGoodsDetail()
-
+		},
+		computed: {
+			...mapState('cartStore', ['cart']),
+			...mapGetters('cartStore',['totalCount'])
+			
+		},
+		watch: {
+			totalCount:{
+				handler(){
+					// 购物车数量
+					// this.options[1].info = this.totalCount
+					var result = this.options.find(function(x){
+						return x.text == '购物车'
+					})
+					result.info = this.totalCount
+				},
+				immediate:true				
+			}	
 		},
 		methods: {
+			...mapMutations('cartStore', ['addToCart','getStorageCart']),
 			onClick(e) {
-				if(e.content.text =="购物车"){
+				if (e.content.text == "购物车") {
 					uni.switchTab({
-						url:'/pages/cart/cart'
+						url: '/pages/cart/cart'
 					})
 				}
 			},
 			buttonClick(e) {
-				
+				if (e.index == 0) {
+					var goods = {}
+					goods.goods_id = this.goods_id
+					goods.goods_name = this.goodDetail.goods_name
+					goods.goods_price = this.goodDetail.goods_price
+					goods.goods_count = 1
+					goods.goods_state = true
+					goods.goods_small_logo = this.goodDetail.goods_small_logo
+					this.addToCart(goods)
+					uni.setStorage({
+						key:'cart',
+						data:JSON.stringify(this.cart)
+					})
+				}
+
 			},
 			async getGoodsDetail() {
 				let result = await uni.$http.getGoodsDetail(this.goods_id)
@@ -153,7 +190,7 @@
 
 	.titleContainer {
 		padding: 30rpx 20rpx;
-		
+
 		.price {
 			color: #C00000;
 			font-size: 38rpx;
@@ -185,14 +222,17 @@
 			font-size: 25rpx;
 		}
 	}
-	.uni-common-mt{
+
+	.uni-common-mt {
 		margin-bottom: 80rpx;
 	}
-	.navContainer{
+
+	.navContainer {
 		position: fixed;
 		bottom: 0;
 		width: 740rpx;
 	}
+
 	// .navContainer {
 	// 	width: 715rpx;
 	// 	background-color: #ffffff;
